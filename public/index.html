@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Woodex - Get Quality Furniture</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/extra.css">
+</head>
+
+<body id="top">
+
+  <!-- HEADER -->
+  <header class="header" data-header>
+    <div class="container">
+      <a href="#" class="logo">HOME DECORE</a>
+      <div class="header-action">
+
+        <!-- User button -->
+        <button class="header-action-btn" id="userBtn" aria-label="user" title="Login / Account">
+          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <!-- Cart button -->
+        <button class="header-action-btn" id="cartBtn" aria-label="cart" title="Cart">
+          <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+          <span class="btn-badge" id="cartCount">0</span>
+        </button>
+
+        <!-- Nav toggle -->
+        <button class="header-action-btn" aria-label="open menu" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERLAY -->
+  <div class="overlay" data-overlay></div>
+
+  <!-- NAV SIDEBAR -->
+  <div class="sidebar" data-navbar>
+    <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+      <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+    </button>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li class="navbar-item"><a href="#home" class="navbar-link" data-nav-link>Home</a></li>
+        <li class="navbar-item"><a href="#product" class="navbar-link" data-nav-link>Product</a></li>
+      </ul>
+    </nav>
+    <!-- Auth status in sidebar -->
+    <div id="sidebarAuth" style="margin-top:30px; padding-top:30px; border-top:1px solid #eee;">
+      <p id="sidebarUserName" style="font-weight:600; margin-bottom:12px; display:none;"></p>
+      <button id="sidebarLogoutBtn" class="auth-btn-solid" style="display:none; width:100%;">Logout</button>
+    </div>
+  </div>
+
+  <!-- ─── AUTH MODAL ─────────────────────────────────── -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal-box">
+      <button class="modal-close" id="authModalClose">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+
+      <!-- Tabs -->
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="loginTab">Login</button>
+        <button class="modal-tab" id="signupTab">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm">
+        <h2 class="modal-title">Welcome Back</h2>
+        <p class="modal-subtitle">Login to access your cart & orders</p>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <p class="form-error" id="loginError"></p>
+        <button class="auth-btn-solid" id="loginSubmit">Login</button>
+        <p class="form-switch">Don't have an account? <button class="link-btn" id="goSignup">Sign Up</button></p>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="signupForm" style="display:none;">
+        <h2 class="modal-title">Create Account</h2>
+        <p class="modal-subtitle">Join us to start shopping</p>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="signupName" placeholder="John Doe" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="signupEmail" placeholder="you@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="signupPassword" placeholder="Min 6 characters" autocomplete="new-password">
+        </div>
+        <p class="form-error" id="signupError"></p>
+        <button class="auth-btn-solid" id="signupSubmit">Create Account</button>
+        <p class="form-switch">Already have an account? <button class="link-btn" id="goLogin">Login</button></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── CART DRAWER ───────────────────────────────── -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>Your Cart</h3>
+      <button id="cartClose"><ion-icon name="close-outline"></ion-icon></button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- items injected here -->
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">
+        Total: <strong id="cartTotal">₹0.00</strong>
+      </div>
+      <button class="auth-btn-solid" id="checkoutBtn">Checkout</button>
+      <button class="auth-btn-outline" id="clearCartBtn">Clear Cart</button>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <main>
+    <article>
+
+      <!-- HERO -->
+      <section class="section hero" id="home" aria-label="home">
+        <div class="container">
+          <ul class="hero-list">
+            <li>
+              <div class="hero-card">
+                <figure class="card-banner img-holder" style="--width: 285; --height: 396;">
+                  <img src="./assets/images/chair_2.jpg" width="200" height="300" alt="Classic chair" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Classic chair</a></h3>
+                  <p class="card-text">Furniture</p>
+                </div>
+              </div>
+            </li>
+            <li class="colspan-2">
+              <div class="hero-card">
+                <figure class="card-banner img-holder" style="--width: 568; --height: 389;">
+                  <img src="./assets/images/bed_1.jpg" width="568" height="389" alt="Wooden Bed" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Wooden Bed</a></h3>
+                  <p class="card-text">Furniture</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="hero-card">
+                <figure class="card-banner img-holder" style="--width: 285; --height: 396;">
+                  <img src="./assets/images/Almirah_1.jpg" width="285" height="396" alt="Wooden Almirah" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Wooden Almirah</a></h3>
+                  <p class="card-text">Furniture</p>
+                </div>
+              </div>
+            </li>
+            <li class="colspan-2">
+              <div class="hero-card">
+                <figure class="card-banner img-holder" style="--width: 580; --height: 213;">
+                  <img src="./assets/images/table_1.jpg" width="580" height="213" alt="Wood Table" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Wood Table</a></h3>
+                  <p class="card-text">Furniture</p>
+                </div>
+              </div>
+            </li>
+            <li class="colspan-2">
+              <div class="hero-card">
+                <figure class="card-banner img-holder" style="--width: 580; --height: 213;">
+                  <img src="./assets/images/sofa_1.jpg" width="580" height="213" alt="Modern Wood Sofa" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Modern Wood Sofa</a></h3>
+                  <p class="card-text">Furniture</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PRODUCTS SECTION -->
+      <section class="section product" id="product" aria-label="products">
+        <div class="container">
+          <div class="title-wrapper">
+            <h2 class="section-title">Popular Products</h2>
+            <ul class="filter-btn-list">
+              <li><button class="filter-btn active" data-filter-btn="all">All</button></li>
+              <li><button class="filter-btn" data-filter-btn="chair">Chairs</button></li>
+              <li><button class="filter-btn" data-filter-btn="bed">Beds</button></li>
+              <li><button class="filter-btn" data-filter-btn="sofa">Sofas</button></li>
+              <li><button class="filter-btn" data-filter-btn="almirah">Almirah</button></li>
+              <li><button class="filter-btn" data-filter-btn="table">Tables</button></li>
+            </ul>
+          </div>
+
+          <ul class="product-list" data-filter="all">
+
+            <li class="chair">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/chair_1.jpg" loading="lazy" alt="Classic Wooden Chair" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('chair1','Classic Wooden Chair',120,'./assets/images/chair_1.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Classic Wooden Chair</a></h3>
+                  <div class="card-price"><data class="price">₹120.00</data></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="chair">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/chair_2.jpg" loading="lazy" alt="Cushion Dining Chair" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('chair2','Cushion Dining Chair',95,'./assets/images/chair_2.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                 
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Cushion Dining Chair</a></h3>
+                  <div class="card-price"><data class="price">₹95.00</data></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="bed">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/bed_1.jpg" loading="lazy" alt="Premium King Bed" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('bed1','Premium King Bed',360,'./assets/images/bed_1.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                 
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Premium King Bed</a></h3>
+                  <div class="card-price">
+                    <del class="del">₹450.00</del>
+                    <data class="price">₹360.00</data>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="bed">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/bed_2.jpg" loading="lazy" alt="Single Storage Bed" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('bed2','Single Storage Bed',280,'./assets/images/bed_2.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Single Storage Bed</a></h3>
+                  <div class="card-price"><data class="price">₹280.00</data></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="almirah">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/Almirah_1.jpg" loading="lazy" alt="Teak Wood Almirah" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('almirah1','Teak Wood Almirah',420,'./assets/images/Almirah_1.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Teak Wood Almirah</a></h3>
+                  <div class="card-price"><data class="price">₹420.00</data></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="sofa">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/sofa_1.jpg" loading="lazy" alt="Modern Wood Sofa" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('sofa1','Modern Wood Sofa',390,'./assets/images/sofa_1.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                  
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Modern Wood Sofa</a></h3>
+                  <div class="card-price"><data class="price">₹390.00</data></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="table">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/table_1.jpg" loading="lazy" alt="Round Coffee Table" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('table1','Round Coffee Table',150,'./assets/images/table_1.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Round Coffee Table</a></h3>
+                  <div class="card-price"><data class="price">₹150.00</data></div>
+                </div>
+              </div>
+            </li>
+
+            <li class="table">
+              <div class="product-card">
+                <div class="card-banner img-holder has-before">
+                  <img src="./assets/images/table_2.jpg" loading="lazy" alt="Oval Center Table" class="img-cover">
+                  <ul class="card-action-list">
+                    <li><button class="card-action-btn" onclick="addToCart('table2','Oval Center Table',175,'./assets/images/table_2.jpg')" title="Add to Cart"><ion-icon name="add-outline"></ion-icon></button></li>
+                    <li><button class="card-action-btn" title="Wishlist"><ion-icon name="heart-outline"></ion-icon></button></li>
+                  </ul>
+            
+                </div>
+                <div class="card-content">
+                  <h3><a href="#" class="card-title">Oval Center Table</a></h3>
+                  <div class="card-price">
+                    <del class="del">₹210.00</del>
+                    <data class="price">₹175.00</data>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <script src="./assets/js/script.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
